@@ -19,12 +19,13 @@ public class LevelGrid2 : MonoBehaviour
         height = h;
     }
 
+   
     public void Setup(Snake2 snake)
     {
         this.snake = snake;
         SpawnFood();
     }
-
+    
     public bool TrySnakeEatFood(Vector2Int snakeGridPosition)
     {
         if (snakeGridPosition == foodGridPosition)
