@@ -5,7 +5,7 @@ using TMPro;
 
 
 
-
+/*
 public abstract class Vehicle
 {
     public string name;
@@ -20,14 +20,14 @@ public class Bike : Vehicle
 {
     public int power;
 }
+*/
 
-
-public class GameOverUI : MonoBehaviour
+public class GameOverUI2 : MonoBehaviour
 {
     // Singleton
-    public static GameOverUI Instance { get; private set; }
-    
-    [SerializeField] private Button restartButton;
+    public static GameOverUI2 Instance { get; private set; }
+
+    //[SerializeField] private Button restartButton;
     [SerializeField] private Button restartButton_DifficultyMode;
 
     [SerializeField] private TextMeshProUGUI messsageText;
@@ -40,8 +40,8 @@ public class GameOverUI : MonoBehaviour
 
         Vehicle v = new Car();
 
-        
-        
+
+
         if (Instance != null)
         {
             Debug.LogError("More than one Instance");
@@ -50,13 +50,13 @@ public class GameOverUI : MonoBehaviour
         Instance = this;
 
 
-        //restartButton_DifficultyMode.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game_Difficulty); });
-        //Hide();
-
-        restartButton.onClick.AddListener(() => {Loader.Load(Loader.Scene.Game);});
+        restartButton_DifficultyMode.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game_Difficulty); });
         Hide();
 
-        
+        //restartButton.onClick.AddListener(() => { Loader.Load(Loader.Scene.Game); });
+        //Hide();
+
+
     }
 
     public void Show(bool hasNewHighScore)
@@ -64,7 +64,7 @@ public class GameOverUI : MonoBehaviour
         UpdateScoreAndHighScore(hasNewHighScore);
         gameObject.SetActive(true);
     }
-    
+
     public void Hide()
     {
         gameObject.SetActive(false);

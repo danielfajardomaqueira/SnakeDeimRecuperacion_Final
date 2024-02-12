@@ -13,7 +13,9 @@ public static class Loader
     {
         Game,
         LoadingScene,
-        MainMenu
+        MainMenu,
+        DifficultySelector,
+        Game_Difficulty
     }
 
     private static Scene sceneAux;

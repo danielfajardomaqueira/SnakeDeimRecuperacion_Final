@@ -1,11 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseUI : MonoBehaviour
+public class PauseUI2 : MonoBehaviour
 {
-    public static PauseUI Instance { get; private set; }
+    public static PauseUI2 Instance { get; private set; }
 
-    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button resumeButton_DifficultyMode;
     [SerializeField] private Button mainMenuButton;
 
     private void Awake()
@@ -17,9 +19,9 @@ public class PauseUI : MonoBehaviour
 
         Instance = this;
 
-        resumeButton.onClick.AddListener(() =>
+        resumeButton_DifficultyMode.onClick.AddListener(() =>
         {
-            GameManager.Instance.ResumeGame();
+            GameManager2.Instance.ResumeGame();
         });
 
         mainMenuButton.onClick.AddListener(() =>
@@ -27,7 +29,7 @@ public class PauseUI : MonoBehaviour
             Time.timeScale = 1f;
             Loader.Load(Loader.Scene.MainMenu);
         });
-        
+
         Hide();
     }
 
@@ -35,7 +37,7 @@ public class PauseUI : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-    
+
     public void Hide()
     {
         gameObject.SetActive(false);
