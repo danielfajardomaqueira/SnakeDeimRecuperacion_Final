@@ -170,13 +170,14 @@ public class Snake2 : MonoBehaviour
     public DifficultyMode.Modes difficultyModes = DifficultyMode.Modes.Easy;
 
 
-
+    public bool shieldActivated = false;
 
     #endregion
 
     private void Start()
     {
         DifficultyModes();
+        shieldActivated = false;
     }
 
     private void Awake()
@@ -281,6 +282,13 @@ public class Snake2 : MonoBehaviour
 
                 CreateBodyPart();
             }
+            //Eat PowerUpShield?
+            bool snakeAtePowerUpShield = levelGrid.TrySnakePowerUpShield(gridPosition);
+            if (snakeAtePowerUpShield)
+            {
+                shieldActivated = true;
+
+            }
 
             if (snakeMovePositionsList.Count > snakeBodySize)
             {
@@ -291,11 +299,18 @@ public class Snake2 : MonoBehaviour
             // Comprobamos el Game Over aquí porque tenemos la posición de la cabeza y la lista snakeMovePositionsList actualizadas para poder comprobar la muerte
             foreach (SnakeMovePosition movePosition in snakeMovePositionsList)
             {
-                if (gridPosition == movePosition.GetGridPosition()) // Posición de la cabeza coincide con alguna parte del cuerpo
+                if (gridPosition == movePosition.GetGridPosition() && !shieldActivated) // Posición de la cabeza coincide con alguna parte del cuerpo
                 {
                     // GAME OVER
                     state = State.Dead;
                     GameManager2.Instance.SnakeDied();
+                }
+
+                if (gridPosition == movePosition.GetGridPosition() && shieldActivated)
+                {
+                    shieldActivated = false;
+                    levelGrid.powerUpShield = false;
+                    
                 }
             }
 

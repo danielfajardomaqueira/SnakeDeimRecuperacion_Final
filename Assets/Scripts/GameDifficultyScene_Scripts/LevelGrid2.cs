@@ -7,11 +7,23 @@ public class LevelGrid2 : MonoBehaviour
     private Vector2Int foodGridPosition;
     private GameObject foodGameObject;
 
+    private Vector2Int powerUpShieldGridPosition;
+    private GameObject powerUpShieldGameObject;
+
+    public bool powerUpShield;
+
     private int width;
     private int height;
 
     private Snake2 snake;
+    
 
+
+    private void Start()
+    {
+        powerUpShield = false;
+        
+    }
 
     public LevelGrid2(int w, int h)
     {
@@ -24,8 +36,10 @@ public class LevelGrid2 : MonoBehaviour
     {
         this.snake = snake;
         SpawnFood();
+        
+
     }
-    
+
     public bool TrySnakeEatFood(Vector2Int snakeGridPosition)
     {
         if (snakeGridPosition == foodGridPosition)
@@ -33,11 +47,34 @@ public class LevelGrid2 : MonoBehaviour
 
             Object.Destroy(foodGameObject);
             SpawnFood();
-            
+            if(snake.shieldActivated == false && powerUpShield == false)
+            {
+                SpawnPowerUpShield();
+                powerUpShield = true;
+
+            }
             Score.AddScore(Score.POINTS);
             //Debug.Log(GameManager.Instance.GetScore());
             return true;
         }
+        else
+        {
+            return false;
+        }
+
+
+    }
+
+    public bool TrySnakePowerUpShield(Vector2Int snakeGridPosition)
+    {
+        if (snakeGridPosition == powerUpShieldGridPosition)
+        {
+            Object.Destroy(powerUpShieldGameObject);
+            powerUpShield = true;
+            
+            return true;
+        }
+
         else
         {
             return false;
@@ -64,6 +101,23 @@ public class LevelGrid2 : MonoBehaviour
         SpriteRenderer foodSpriteRenderer = foodGameObject.AddComponent<SpriteRenderer>();
         foodSpriteRenderer.sprite = GameAssets2.Instance.foodSprite;
         foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y, 0);
+
+    }
+
+    private void SpawnPowerUpShield()
+    {
+        do
+        {
+            powerUpShieldGridPosition = new Vector2Int(
+                Random.Range(-width / 2, width / 2),
+                Random.Range(-height / 2, height / 2));
+        } while (snake.GetFullSnakeBodyGridPosition().IndexOf(powerUpShieldGridPosition) != -1);
+
+        powerUpShieldGameObject = new GameObject("PowerUpShield");
+        SpriteRenderer powerUpShieldSpriteRenderer = powerUpShieldGameObject.AddComponent<SpriteRenderer>();
+        powerUpShieldSpriteRenderer.sprite = GameAssets2.Instance.powerUpShield;
+        powerUpShieldGameObject.transform.position = new Vector3(powerUpShieldGridPosition.x, powerUpShieldGridPosition.y, 0);
+        
 
     }
 

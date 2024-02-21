@@ -12,6 +12,8 @@ public class GameAssets2 : MonoBehaviour
     public Sprite snakeBodySprite;
     public Sprite foodSprite;
 
+    public Sprite powerUpShield;
+
     
 
     
