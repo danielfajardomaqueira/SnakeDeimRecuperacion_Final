@@ -989,13 +989,14 @@ GameObject:
   - component: {fileID: 626011505}
   - component: {fileID: 626011507}
   - component: {fileID: 626011506}
+  - component: {fileID: 626011508}
   m_Layer: 0
   m_Name: ShieldUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &626011505
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1054,6 +1055,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626011504}
   m_CullTransparentMesh: 1
+--- !u!114 &626011508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626011504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5dbfff4f7c70f947bd616591ddc11ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &697184952
 GameObject:
   m_ObjectHideFlags: 0

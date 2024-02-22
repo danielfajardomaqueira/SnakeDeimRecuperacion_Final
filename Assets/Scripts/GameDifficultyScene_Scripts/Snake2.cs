@@ -165,8 +165,6 @@ public class Snake2 : MonoBehaviour
     private State state;
 
 
-
-
     public DifficultyMode.Modes difficultyModes = DifficultyMode.Modes.Easy;
 
 
@@ -287,6 +285,7 @@ public class Snake2 : MonoBehaviour
             if (snakeAtePowerUpShield)
             {
                 shieldActivated = true;
+                ShieldUI.Instance.Show();
 
             }
 
@@ -310,14 +309,14 @@ public class Snake2 : MonoBehaviour
                 {
                     shieldActivated = false;
                     levelGrid.powerUpShield = false;
-                    
+                    ShieldUI.Instance.Hide();
                 }
             }
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y, 0);
-            canMove = true;
             transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirectionVector));
             UpdateBodyParts();
+            canMove = true;
         }
     }
 

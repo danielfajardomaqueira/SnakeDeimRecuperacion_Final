@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
 
-public class LevelGrid2 : MonoBehaviour
+public class LevelGrid2
 {
     private Vector2Int foodGridPosition;
     private GameObject foodGameObject;
