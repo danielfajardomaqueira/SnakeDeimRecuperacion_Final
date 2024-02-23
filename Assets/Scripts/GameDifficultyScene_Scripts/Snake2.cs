@@ -212,7 +212,7 @@ public class Snake2 : MonoBehaviour
         this.levelGrid = levelGrid;
     }
     /// <summary>
-    /// Segun la dificultad seleccionada, la serpiente cambia la velocidad
+    /// Depending on the difficulty selected, the snake changes speed
     /// </summary>
     private void DifficultyModes()
     {

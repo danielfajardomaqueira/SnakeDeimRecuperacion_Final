@@ -23,17 +23,17 @@ public class DataPersistence : MonoBehaviour
         }
     }
     /// <summary>
-    /// Coloca la dificultad selecionada por el jugador
+    /// Set the difficulty selected by the player
     /// </summary>
-    /// <param name="difficulty">Guarda el valor de la velocidad selecionado</param>
+    /// <param name="difficulty">Save the selected speed value</param>
     public void SetDifficulty(DifficultyMode.Modes difficulty)
     {
         this.difficulty = difficulty;
     }
     /// <summary>
-    /// Obtiene el valor de dificultad selecionado
+    /// Gets the selected difficulty value
     /// </summary>
-    /// <returns>devuelve el valor para que se la velocidad a la que se mueve la serpiente cuando inicie el juego</returns>
+    /// <returns>returns the value to be the speed at which the snake moves when the game starts</returns>
     public DifficultyMode.Modes GetDifficulty()
     {
         return difficulty;
