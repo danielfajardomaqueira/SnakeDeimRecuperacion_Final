@@ -127,10 +127,14 @@ public class Snake : MonoBehaviour
 
     public State state;
 
-    
-    
+    public bool shieldActivated = false;
+
     #endregion
-    
+
+    private void Start()
+    {
+        shieldActivated = false;
+    }
     private void Awake()
     {
         startGridPosition = new Vector2Int(0, 0);
@@ -215,7 +219,15 @@ public class Snake : MonoBehaviour
                 snakeBodySize++;
                 CreateBodyPart();
             }
-            
+            //Eat PowerUpShield?
+            bool snakeAtePowerUpShield = levelGrid.TrySnakePowerUpShield(gridPosition);
+            if (snakeAtePowerUpShield)
+            {
+                shieldActivated = true;
+                ShieldUI.Instance.Show();
+
+            }
+
             if (snakeMovePositionsList.Count > snakeBodySize)
             {
                 snakeMovePositionsList.
@@ -225,11 +237,18 @@ public class Snake : MonoBehaviour
             // Comprobamos el Game Over aquí porque tenemos la posición de la cabeza y la lista snakeMovePositionsList actualizadas para poder comprobar la muerte
             foreach (SnakeMovePosition movePosition in snakeMovePositionsList)
             {
-                if (gridPosition == movePosition.GetGridPosition()) // Posición de la cabeza coincide con alguna parte del cuerpo
+                if (gridPosition == movePosition.GetGridPosition() && !shieldActivated) // Posición de la cabeza coincide con alguna parte del cuerpo
                 {
                     // GAME OVER
                     state = State.Dead;
                     GameManager.Instance.SnakeDied();
+                }
+
+                if (gridPosition == movePosition.GetGridPosition() && shieldActivated)
+                {
+                    shieldActivated = false;
+                    levelGrid.powerUpShield = false;
+                    ShieldUI.Instance.Hide();
                 }
             }
 

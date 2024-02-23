@@ -14,6 +14,17 @@ public class LevelGrid
     private FoodScriptableObject foodScriptableObject;
     private int foodCount;
 
+    private Vector2Int powerUpShieldGridPosition;
+    private GameObject powerUpShieldGameObject;
+
+    public bool powerUpShield;
+
+    private void Start()
+    {
+        powerUpShield = false;
+
+    }
+
     public LevelGrid(int w, int h)
     {
         width = w;
@@ -31,14 +42,33 @@ public class LevelGrid
         if (snakeGridPosition == foodGridPosition)
         {
             //Score.AddScore(Score.POINTS);
-
-            
-            Score.AddScore(foodScriptableObject.points);
             Object.Destroy(foodGameObject);
             SpawnFood();
-            
+            if (snake.shieldActivated == false && powerUpShield == false)
+            {
+                SpawnPowerUpShield();
+                powerUpShield = true;
+
+            }
+            Score.AddScore(foodScriptableObject.points);
             return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool TrySnakePowerUpShield(Vector2Int snakeGridPosition)
+    {
+        if (snakeGridPosition == powerUpShieldGridPosition)
+        {
+            Object.Destroy(powerUpShieldGameObject);
+            powerUpShield = true;
+
+            return true;
+        }
+
         else
         {
             return false;
@@ -71,6 +101,23 @@ public class LevelGrid
         //foodSpriteRenderer.sprite = GameAssets.Instance.foodSprite;
         foodGameObject.transform.position = new Vector3(foodGridPosition.x, foodGridPosition.y, 0);
         
+    }
+
+    private void SpawnPowerUpShield()
+    {
+        do
+        {
+            powerUpShieldGridPosition = new Vector2Int(
+                Random.Range(-width / 2, width / 2),
+                Random.Range(-height / 2, height / 2));
+        } while (snake.GetFullSnakeBodyGridPosition().IndexOf(powerUpShieldGridPosition) != -1);
+
+        powerUpShieldGameObject = new GameObject("PowerUpShield");
+        SpriteRenderer powerUpShieldSpriteRenderer = powerUpShieldGameObject.AddComponent<SpriteRenderer>();
+        powerUpShieldSpriteRenderer.sprite = GameAssets.Instance.powerUpShield;
+        powerUpShieldGameObject.transform.position = new Vector3(powerUpShieldGridPosition.x, powerUpShieldGridPosition.y, 0);
+
+
     }
 
     public Vector2Int ValidateGridPosition(Vector2Int gridPosition)

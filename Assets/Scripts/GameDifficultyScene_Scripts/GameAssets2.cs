@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class GameAssets2 : MonoBehaviour
 {
+    [Serializable]
+
+    public class SoundAudioClip2
+    {
+        public SoundManager2.Sound sound2;
+        public AudioClip audioClip;
+    }
 
     public static GameAssets2 Instance { get; private set; }
 
@@ -14,9 +22,8 @@ public class GameAssets2 : MonoBehaviour
 
     public Sprite powerUpShield;
 
-    
+    public SoundAudioClip2[] soundAudioClipsArray;
 
-    
 
     private void Awake()
     {

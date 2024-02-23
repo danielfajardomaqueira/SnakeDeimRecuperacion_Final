@@ -39,7 +39,11 @@ public class LevelGrid2
         
 
     }
-
+    /// <summary>
+    /// Hace aparecer una fruta, y una vez comida la fruta aparece el powerUp
+    /// </summary>
+    /// <param name="snakeGridPosition">Guarda la posicion en la que se encuentra la cabeza de la serpiente</param>
+    /// <returns>True; como fruta y aparece escudo. False; para que escudo no aparezca otra vez si ya lo tengo activado</returns>
     public bool TrySnakeEatFood(Vector2Int snakeGridPosition)
     {
         if (snakeGridPosition == foodGridPosition)
@@ -65,6 +69,11 @@ public class LevelGrid2
 
     }
 
+    /// <summary>
+    /// Comprueba si la serpiente se ha comido el PowerUP. Si la posicion de la cabeza es igual al del PowerUp.
+    /// </summary>
+    /// <param name="snakeGridPosition">Posicion en la que esta la cabeza de la serpiente</param>
+    /// <returns>true para activar el powerup, false si no lo tiene</returns>
     public bool TrySnakePowerUpShield(Vector2Int snakeGridPosition)
     {
         if (snakeGridPosition == powerUpShieldGridPosition)
@@ -104,6 +113,9 @@ public class LevelGrid2
 
     }
 
+    /// <summary>
+    /// Codigo para hacer aparecer el powerUp.
+    /// </summary>
     private void SpawnPowerUpShield()
     {
         do

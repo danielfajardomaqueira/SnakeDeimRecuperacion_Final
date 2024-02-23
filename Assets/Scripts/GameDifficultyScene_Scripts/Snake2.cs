@@ -211,7 +211,9 @@ public class Snake2 : MonoBehaviour
         // levelGrid de snake = levelGrid que viene por parámetro
         this.levelGrid = levelGrid;
     }
-
+    /// <summary>
+    /// Segun la dificultad seleccionada, la serpiente cambia la velocidad
+    /// </summary>
     private void DifficultyModes()
     {
         switch (DataPersistence.Instance.GetDifficulty())

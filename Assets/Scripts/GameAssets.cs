@@ -28,6 +28,10 @@ public class GameAssets : MonoBehaviour
 
     public SoundAudioClip[] soundAudioClipsArray;
 
+
+    public Sprite powerUpShield;
+
+
     private void Awake()
     {
         // Singleton
